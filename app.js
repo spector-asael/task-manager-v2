@@ -1,6 +1,7 @@
 // filename: app.js
 import express from 'express'
 import path from "path";
+import router from './routes/routes.js'
 
 const app = express();
 
@@ -15,9 +16,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/', (req, res) => {
-    res.send("Hello, world!");
-});
+app.use('/', router);
 
 app.use((req, res) => {
     res.status(404).render("error", {Title: "Error", Error: "404 Error"})

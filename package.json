@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "A task manager application, now with additional database functionality",
   "main": "app.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,14 @@
   "bugs": {
     "url": "https://github.com/spector-asael/task-manager-v2/issues"
   },
-  "homepage": "https://github.com/spector-asael/task-manager-v2#readme"
+  "homepage": "https://github.com/spector-asael/task-manager-v2#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "pg": "^8.14.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
 }

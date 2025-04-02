@@ -1,1 +1,52 @@
-<h1> Welcome to the Task Manager! </h1>
+<div class="header">
+    <h1> Welcome to the Task Manager! </h1>
+    
+<div >
+    <div >
+        <% if (tasks.length > 0) { %>
+            <% tasks.forEach(task => { %>
+                <% if (task.complete != 1) { %>
+                    <div  <%= task.complete ? 'completed' : 'incomplete' %>">
+                        <div >
+                            <p>Task ID: <%= task.id %></p>
+                            <p>Task name: <%= task.task_name %></p>
+                            <p>Task description: 
+                                <% if (task.task_description) { %>
+                                    <%= task.task_description %>
+                                <% } else { %>
+                                    None
+                                <% } %>
+                            </p>
+                            <p>
+                                Task Priority:
+                                <%= task.priority_name%>
+                            </p>
+                        </div>
+                        <div class="task-button">
+                            <% if (!task.complete) { %>
+                                <form method="POST" action="/complete-task/<%= task.id %>" class="button">
+                                    <button type="submit" class="complete">Complete Task</button>
+                                </form>
+                                <br>
+                            <% } else { %>
+                                <form method="POST" action="/complete-task/<%= task.id %>" class="button">
+                                    <button type="submit" class="undo">Undo Completion</button>
+                                </form>
+                                <br>
+                            <% } %>
+                            <form method="POST" action="/delete-task/<%= task.id %>" class="button">
+                                <input type="hidden" name="type" value="delete">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="index" value="<%= task.id %>">
+                                <button type="submit" class="delete">Delete Task</button>
+                            </form>
+                            
+                        </div>
+                    </div>
+                <% } %>
+            <% }) %>
+        <% } else { %>
+            <p class="no">No tasks available</p>
+        <% } %>
+    </div>
+</div>

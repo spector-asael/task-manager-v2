@@ -8,7 +8,7 @@ CREATE TABLE priority (
 
 CREATE TABLE tasks (
     id SERIAL PRIMARY KEY,
-    task_name VARCHAR(100) NOT NULL CHECK (LENGTH(task_name) >= 3), /* Ensures task name can only be between 3-100 */
+    task_name VARCHAR(100) NOT NULL CHECK (LENGTH(task_name) >= 3) UNIQUE, 
     task_priority INT NOT NULL, 
     task_description VARCHAR(500),
     created_at TIMESTAMP (0) WITH TIME ZONE NOT NULL DEFAULT NOW(),

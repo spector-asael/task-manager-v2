@@ -1,0 +1,50 @@
+<section class="sidebar">
+    <div class="addtask">
+        <button id="add-task"> Add-Task </button>
+        <% if (postmessage != "" ){ %>
+            <h2 id="error-message"> <%= postmessage %> </h2>
+        <%}%>
+        <form id="task-form" method="post" action="/tasks"> 
+            <label for="task-name"> Task Name:</label>
+            <input type="text" id="task-name" name="task-name">
+
+            <label for="description"> Description:</label>
+            <textarea id="description" name="description"></textarea>
+            <label for="priority"> Priority: </label> 
+            <div class="priority">
+                <label>
+                <input type="radio" name="task-priority" value="1" checked> Low
+                </label>
+                <label>
+                <input type="radio" name="task-priority" value="2"> Medium 
+                </label>
+                <label>
+                    <input type="radio" name="task-priority" value="3"> High
+                </label>
+            </div>
+            <input type="submit" value="Add New Task" id="submit">
+        </form>
+
+    </div>
+    <div id="task-form">
+
+    </div>
+    <script> 
+        const addTask = document.getElementById("add-task");
+        const form = document.getElementById("task-form");
+
+
+        addTask.addEventListener("click", () => {
+            if (form.style.display == "flex") {
+                form.style.display = "none";
+                addTask.innerText = "Add task";
+                console.log("Hi")
+            } else {
+            form.style.display = "flex";
+            addTask.innerText = "Hide"
+            console.log("Hi2")
+        }
+        })
+        
+    </script>
+</section>

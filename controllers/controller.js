@@ -2,7 +2,7 @@ import { getTasks, addTask, deleteTask } from "../models/models.js";
 
 export const home = async (req, res) => {
     let message = req.query.error || '';
-    let showform = false;
+    let showform = true;
     let tasks;
     try {
         tasks = await getTasks();
@@ -77,9 +77,9 @@ export const deleteTaskById = async (req, res) => {
     try {
         const result = await deleteTask(taskId);
         if (result) {
-            res.redirect('/'); 
+            res.json({message: "Task Deleted Successfully!"})
         } else {
-            res.status(404).send("Task not found");
+            res.status(404).json({message: "Task not found."})
         }
     } catch (error) {
         console.error("Error deleting task:", error);

@@ -9,8 +9,6 @@ app.use(methodOverride('_method'));
 
 import router from './routes/routes.js'
 
-
-
 app.use(express.urlencoded({ extended: true}));
 app.use(express.static(path.join(process.cwd(), "public")));
 app.set("view engine", "ejs");

@@ -24,23 +24,26 @@
                         </div>
                         <div class="task-button">
                             <% if (!task.complete) { %>
-                                <form method="POST" action="/complete-task/<%= task.id %>" class="button">
+                                <!-- 
+                                <form method="POST" action="/complete-task/<%= task.id %>" >
                                     <button type="submit" class="complete">Complete Task</button>
                                 </form>
-                                <br>
+                                <br> -->
+                                <button class="complete" task-id="<%= task.id %>"> Complete Task </button>
                             <% } else { %>
-                                <form method="POST" action="/complete-task/<%= task.id %>" class="button">
+                                <!--
+                                <form method="POST" action="/complete-task/<%= task.id %>" >
                                     <button type="submit" class="undo">Undo Completion</button>
-                                </form>
-                                <br>
+                                </form> 
+                                <br> -->
+                                <button class="undo" task-id="<%= task.id %>"> Undo Completion </button>
                             <% } %>
-                            <form method="POST" action="/delete-task/<%= task.id %>" class="button">
-                                <input type="hidden" name="type" value="delete">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="index" value="<%= task.id %>">
+                            <!--
+                            <form method="POST" action="/delete-task/<%= task.id %>">
                                 <button type="submit" class="delete">Delete Task</button>
                             </form>
-                            
+                            -->
+                                <button class="delete" task-id="<%= task.id %>"> Delete Task </button>
                         </div>
                     </div>
                 <% } %>
@@ -50,3 +53,4 @@
         <% } %>
     </div>
 </div>
+<script src="./script.js"></script>

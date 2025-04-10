@@ -5,10 +5,10 @@
     <div >
         <% if (tasks.length > 0) { %>
             <% tasks.forEach(task => { %>
-                <% if (task.complete != 1) { %>
-                    <div  <%= task.complete ? 'completed' : 'incomplete' %>">
+                <% if (task.complete != 1) { %> 
+                    <div    >
                         <div >
-                            <p>Task ID: <%= task.id %></p>
+                            <p>Task ID: <%= task.task_id %></p>
                             <p>Task name: <%= task.task_name %></p>
                             <p>Task description: 
                                 <% if (task.task_description) { %>
@@ -24,26 +24,11 @@
                         </div>
                         <div class="task-button">
                             <% if (!task.complete) { %>
-                                <!-- 
-                                <form method="POST" action="/complete-task/<%= task.id %>" >
-                                    <button type="submit" class="complete">Complete Task</button>
-                                </form>
-                                <br> -->
-                                <button class="complete" task-id="<%= task.id %>"> Complete Task </button>
+                                <button class="complete" task-id="<%= task.task_id %>"> Complete Task </button>
                             <% } else { %>
-                                <!--
-                                <form method="POST" action="/complete-task/<%= task.id %>" >
-                                    <button type="submit" class="undo">Undo Completion</button>
-                                </form> 
-                                <br> -->
-                                <button class="undo" task-id="<%= task.id %>"> Undo Completion </button>
+                                <button class="undo" task-id="<%= task.task_id %>"> Undo Completion </button>
                             <% } %>
-                            <!--
-                            <form method="POST" action="/delete-task/<%= task.id %>">
-                                <button type="submit" class="delete">Delete Task</button>
-                            </form>
-                            -->
-                                <button class="delete" task-id="<%= task.id %>"> Delete Task </button>
+                                <button class="delete" task-id="<%= task.task_id %>"> Delete Task </button>
                         </div>
                     </div>
                 <% } %>
@@ -53,4 +38,5 @@
         <% } %>
     </div>
 </div>
-<script src="./script.js"></script>
+
+<script type="module" src="./script.js"></script>

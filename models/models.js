@@ -4,7 +4,7 @@ export const getTasks = async (req, res) => {
     try {
         const result = await query(`
             SELECT * FROM tasks
-            INNER JOIN priority ON priority.id = tasks.task_priority`);
+            INNER JOIN priority ON priority.priority_id = tasks.task_priority`);
         return result.rows;
     } catch ( error ) {
         console.error("Error fetching tasks:", error);
@@ -29,7 +29,7 @@ export const addTask = async (taskName, taskDescription, priority) => {
 export const deleteTask = async (taskId) => {
     const result = await query(`
         DELETE FROM tasks 
-        WHERE id = $1
+        WHERE task_id = $1
         RETURNING *;
     `, [taskId]); 
 

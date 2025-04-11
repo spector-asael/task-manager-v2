@@ -1,10 +1,12 @@
 // filename: app.js
-import express from 'express'
+import express from 'express';
 import path from "path";
-import router from './routes/routes.js'
 import expressLayouts from 'express-layouts';
-
+import methodOverride from "method-override";
 const app = express();
+app.use(methodOverride('_method'));
+
+import router from './routes/routes.js'
 
 app.use(express.urlencoded({ extended: true}));
 app.use(express.static(path.join(process.cwd(), "public")));
@@ -22,7 +24,7 @@ app.use((req, res, next) => {
 app.use('/', router);
 
 app.use((req, res) => {
-    res.status(404).render("error", {Title: "Error", Error: "404 Error"})
+    res.status(404).send("Error");
 });
 
 const PORT = 3001;

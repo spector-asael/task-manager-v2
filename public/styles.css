@@ -1,0 +1,142 @@
+/* ========== BASE STYLES ========== */
+html, body {
+    padding: 0;
+    margin: 0;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+}
+
+body {
+    background: linear-gradient(to right, rgb(44, 7, 131), rgb(33, 0, 63));
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    position: relative;
+    z-index: 0;
+}
+
+/* ========== BACKGROUND GLOW ========== */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, rgba(128, 0, 255, 0.25), transparent 70%);
+    filter: blur(120px);
+    z-index: -1;
+}
+
+/* ========== HEADER ========== */
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px 0;
+    width: 100%;
+}
+
+/* ========== SIDEBAR ========== */
+.sidebar {
+    background-image: linear-gradient(to right, rgb(12, 1, 31), rgb(25, 0, 83));
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    min-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(128, 0, 255, 0.4);
+    z-index: 1;
+}
+
+/* ========== FORM AREA ========== */
+#task-form {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    background-color: #1e1e2f;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+#task-form label {
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Input fields (reused styles) */
+input[type="text"],
+textarea {
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    background-color: #1a0033;
+    color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 8px #8000ff99;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #9f7aea;
+    box-shadow: 0 0 16px #8000ffcc;
+}
+
+/* ========== TASK FORM CONTAINER ========== */
+.addtask {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+/* ========== BUTTONS ========== */
+#add-task,
+#submit {
+    background: linear-gradient(to right, #8000ff, #b266ff);
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    height: 30px;
+    box-shadow: 0 0 10px #8000ff88;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+#add-task{
+    width: 100%;
+}
+
+#add-task:hover,
+#submit:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #a64dff;
+}
+
+/* ========== FEEDBACK MESSAGES ========== */
+.error {
+    margin-top: -5px;
+    color: rgb(255, 0, 0);
+    text-align: center;
+    display: none;
+    font-size: 18px;
+}
+
+#success-message {
+    color: rgb(0, 211, 0);
+    text-align: center;
+    display: none;
+}
+
+.input-error {
+    border: 2px solid red !important;
+    box-shadow: 0 0 5px red !important;
+}

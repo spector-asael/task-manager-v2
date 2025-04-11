@@ -1,3 +1,5 @@
+import {handleError} from './helperfunctions.js'
+
 export function deleteTask(){
     const taskID = this.getAttribute('task-id');
     
@@ -14,10 +16,25 @@ export function deleteTask(){
     })
 }
 
-export function addTask (event) {
-    event.preventDefault();  // Prevents form submission
+export function completeTask(){
+    const taskID = this.getAttribute('task-id');
 
-    const formData = new FormData(event.target);  // Make sure we get the correct form
+    fetch(`/complete-task/${taskID}`, {
+        method: 'PATCH',
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message);
+        window.location.reload();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    })
+}
+export function addTask (event) {
+    event.preventDefault();  
+
+    const formData = new FormData(event.target);  
     
     for (let pair of formData.entries()) {
         console.log(pair[0] + ": " + pair[1]);
@@ -39,16 +56,17 @@ export function addTask (event) {
     .then(data => {
         if (data.success) {
             window.location.reload();
-            const addTask = document.getElementById("add-task").style.display = "flex";
-            document.getElementById("error-message").innerText = "Task added successfully!";
-            form.reset(); 
+            localStorage.setItem("taskAdded", "true");  
         } else {
-            document.getElementById("error-message").innerText = "Error: " + data.message;
+            handleError(data);
         }
     })
     .catch(error => {
         console.error('Error:', error);
-        document.getElementById("error-message").innerText = "An error occurred.";
+        const errorMessage = document.getElementById("general-error-message");
+        errorMessage.style.display = "block";
+        errorMessage.innerText = "An error occurred.";
+        
     });
 };
 

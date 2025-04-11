@@ -51,7 +51,7 @@ export const postAddTask = async (req, res) => {
         console.log(error);
         for(let i = 0; i < errorMessages.length; i++){
             if(error.code == errorMessages[i].code && error.message.includes(errorMessages[i].field)){
-                return res.status(400).json({ message: errorMessages[i].message });
+                return res.status(400).json({ message: errorMessages[i].message, field: errorMessages[i].field });
             }
         }
     }

@@ -1,4 +1,4 @@
-import { deleteTask, addTask, test } from "./functions.js";
+import { deleteTask, addTask } from "./mainFunctions.js";
 
 const addingTask = document.getElementById("task-form");
 
@@ -22,3 +22,28 @@ for(let i = 0; i < undoButtons.length; i++){
   
     deleteButtons[i].addEventListener("click", deleteTask);
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("taskAdded") === "true") {
+        document.getElementById("task-form").style.display = "flex";
+        document.getElementById("success-message").style.display = "block";
+        document.getElementById("success-message").innerText = "Task added successfully!";
+        document.getElementById("add-task").innerText = "Hide";
+        localStorage.removeItem("taskAdded"); 
+    }
+});
+
+const addTaskButton = document.getElementById("add-task");
+        const form = document.getElementById("task-form");
+
+        addTaskButton.addEventListener("click", () => {
+            if (form.style.display == "flex") {
+                form.style.display = "none";
+                addTaskButton.innerText = "Add task";
+                console.log("Hi")
+            } else {
+            form.style.display = "flex";
+            addTaskButton.innerText = "Hide"
+            console.log("Hi2")
+        }
+});

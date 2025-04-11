@@ -1,7 +1,6 @@
 // filename: app.js
-import express from 'express'
+import express from 'express';
 import path from "path";
-
 import expressLayouts from 'express-layouts';
 import methodOverride from "method-override";
 const app = express();

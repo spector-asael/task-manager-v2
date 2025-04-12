@@ -1,3 +1,5 @@
+// filename: ./public/mainFunctions.js
+
 import {handleError} from './helperfunctions.js'
 
 export function deleteTask(){
@@ -17,6 +19,7 @@ export function deleteTask(){
 }
 
 export function completeTask(){
+   
     const taskID = this.getAttribute('task-id');
 
     fetch(`/complete-task/${taskID}`, {
@@ -31,6 +34,25 @@ export function completeTask(){
         console.error('Error:', error);
     })
 }
+
+export function uncompleteTask(){
+   
+    console.log("mainfunctions.js");
+    const taskID = this.getAttribute('task-id');
+
+    fetch(`/uncomplete-task/${taskID}`, {
+        method: 'PATCH',
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message);
+        window.location.reload();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    })
+}
+
 export function addTask (event) {
     event.preventDefault();  
 
@@ -69,24 +91,3 @@ export function addTask (event) {
         
     });
 };
-
-export function test (event){
-    console.log("test");
-}
-/*
-export function completeTask(){
-    const taskID = this.getAttribute('task-id');
-    
-    fetch(`/complete-task/${taskID}`, {
-        method: 'PATCH',
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data.message);
-        window.location.reload();
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    })
-}
-*/

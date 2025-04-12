@@ -1,4 +1,5 @@
-import { getTasks, addTask, deleteTask } from "../models/models.js";
+// filename: ./controllers/controllers.js
+import { getTasks, addTask, deleteTask, completeTask, uncompleteTask } from "../models/models.js";
 
 export const home = async (req, res) => {
     let message = req.query.error || '';
@@ -76,5 +77,35 @@ export const deleteTaskById = async (req, res) => {
 };
 
 export const completeTaskById = async (req, res) => {
-    console.log()
-}
+    console.log("Controller");
+    const taskId = req.params.id;
+    
+    try {
+        const result = await completeTask(taskId); 
+        if (result) {
+            res.json({ message: "Task marked as completed!" });
+        } else {
+            res.status(404).json({ message: "Task not found." });
+        }
+    } catch (error) {
+        console.error("Error completing task:", error);
+        res.status(500).json({ message: "An error occurred while updating the task status." });
+    }
+};
+
+export const uncompleteTaskById = async (req, res) => {
+    console.log("Controller");
+    const taskId = req.params.id;
+    
+    try {
+        const result = await uncompleteTask(taskId); 
+        if (result) {
+            res.json({ message: "Task marked as uncompleted" });
+        } else {
+            res.status(404).json({ message: "Task not found." });
+        }
+    } catch (error) {
+        console.error("Error completing task:", error);
+        res.status(500).json({ message: "An error occurred while updating the task status." });
+    }
+};

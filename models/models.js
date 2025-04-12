@@ -1,3 +1,4 @@
+// filename: ./models/models.js
 import { query } from "../config/db.js";
 
 export const getTasks = async (req, res) => {
@@ -34,4 +35,27 @@ export const deleteTask = async (taskId) => {
     `, [taskId]); 
 
     return result.rows[0]; 
+};
+
+export const completeTask = async (taskId) => {
+
+    const result = await query(`
+        UPDATE tasks 
+        SET completion_status = TRUE 
+        WHERE task_id = $1 
+        RETURNING *;
+        `, [taskId])
+    
+    return result.rows[0];
+};
+export const uncompleteTask = async (taskId) => {
+
+    const result = await query(`
+        UPDATE tasks 
+        SET completion_status = FALSE 
+        WHERE task_id = $1 
+        RETURNING *;
+        `, [taskId])
+    
+    return result.rows[0];
 };

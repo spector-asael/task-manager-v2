@@ -1,4 +1,6 @@
-import { deleteTask, addTask } from "./mainFunctions.js";
+// filename: ./public/script.js
+
+import { deleteTask, addTask, completeTask, uncompleteTask } from "./mainFunctions.js";
 
 const addingTask = document.getElementById("task-form");
 
@@ -15,12 +17,12 @@ for(let i = 0; i < deleteButtons.length; i++){
 
 for(let i = 0; i < completeButtons.length; i++){
    
-    deleteButtons[i].addEventListener("click", deleteTask);
+    completeButtons[i].addEventListener("click", completeTask);
 }
 
 for(let i = 0; i < undoButtons.length; i++){
   
-    deleteButtons[i].addEventListener("click", deleteTask);
+    undoButtons[i].addEventListener("click", uncompleteTask);
 }
 
 window.addEventListener("DOMContentLoaded", () => {

@@ -98,7 +98,75 @@ textarea:focus {
     gap: 10px;
     width: 100%;
 }
-
+/* ========== TASKS ========== */
+.task-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, #1e293b, #0f172a);
+    border: 1px solid #334155;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .task-bar:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  }
+  
+  .task-bar.complete-task {
+    border-left: 5px solid #10b981; /* emerald glow */
+    background: linear-gradient(90deg, #064e3b, #0f172a);
+  }
+  
+  .task-bar.incomplete-task {
+    border-left: 5px solid #f59e0b; /* amber glow */
+    background: linear-gradient(90deg, #7c2d12, #0f172a);
+  }
+  
+  .task-bar p {
+    margin: 0.2rem 0;
+    font-size: 0.95rem;
+  }
+  
+  .task-bar > div:first-child {
+    flex-grow: 1;
+  }
+  
+  .task-button {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .task-button button {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #1e40af;
+    color: #f1f5f9;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+  }
+  
+  .task-button button.complete {
+    background-color: #10b981; /* green */
+  }
+  
+  .task-button button.undo {
+    background-color: #f59e0b; /* amber */
+  }
+  
+  .task-button button.delete {
+    background-color: #ef4444; /* red */
+  }
+  
+  .task-button button:hover {
+    filter: brightness(1.2);
+  }
 /* ========== BUTTONS ========== */
 #add-task,
 #submit {

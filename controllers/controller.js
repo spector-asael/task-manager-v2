@@ -1,4 +1,7 @@
-import { getTasks, addTask, deleteTask } from "../models/models.js";
+// filename: ./controllers/controllers.js
+import { getTasks, addTask, deleteTask, 
+    completeTask, uncompleteTask, getTasksByName, 
+    getTasksByPriority, getTasksByCompletion } from "../models/models.js";
 
 export const home = async (req, res) => {
     let message = req.query.error || '';
@@ -10,7 +13,7 @@ export const home = async (req, res) => {
     } catch (error) {
         res.status(400).send("An error occured while fetching all the tasks.");
     }
-    console.log(tasks);
+   
     res.render("index", {
         tasks: tasks,
         postmessage: message,
@@ -18,18 +21,8 @@ export const home = async (req, res) => {
     });
 }
 
-export const getAllTasks = async (req, res) => {
-    try {
-        const tasks = await getTasks();
-        console.log(tasks.rows);
-        res.json(tasks);
-    } catch (error) {
-        res.status(500).send("An error occured while fetching tasks.");
-    }
-}
-
 export const postAddTask = async (req, res) => {
-    console.log(req.body);
+   
     const { 'task-name': name, 'description': description, 'task-priority': priority } = req.body;
 
     if (!name) {
@@ -59,7 +52,7 @@ export const postAddTask = async (req, res) => {
 }
 
 export const deleteTaskById = async (req, res) => {
-    console.log("DELETE request received for task ID:", req.params.id)
+    
     const taskId = req.params.id; 
     
     try {
@@ -76,5 +69,95 @@ export const deleteTaskById = async (req, res) => {
 };
 
 export const completeTaskById = async (req, res) => {
-    console.log()
-}
+    
+    const taskId = req.params.id;
+    
+    try {
+        const result = await completeTask(taskId); 
+        if (result) {
+            res.json({ message: "Task marked as completed!" });
+        } else {
+            res.status(404).json({ message: "Task not found." });
+        }
+    } catch (error) {
+        console.error("Error completing task:", error);
+        res.status(500).json({ message: "An error occurred while updating the task status." });
+    }
+};
+
+export const uncompleteTaskById = async (req, res) => {
+    
+    const taskId = req.params.id;
+    
+    try {
+        const result = await uncompleteTask(taskId); 
+        if (result) {
+            res.json({ message: "Task marked as uncompleted" });
+        } else {
+            res.status(404).json({ message: "Task not found." });
+        }
+    } catch (error) {
+        console.error("Error completing task:", error);
+        res.status(500).json({ message: "An error occurred while updating the task status." });
+    }
+};
+
+export const searchTasksByName = async (req, res) => {
+    const taskName = req.query.taskName || '';
+
+    let tasks;
+    try {
+        tasks = await getTasksByName(taskName);  // Calls the model that searches by task name
+    } catch (error) {
+        res.status(400).send("An error occurred while fetching tasks.");
+        return;
+    }
+
+    res.render("index", {
+        tasks: tasks,
+        postmessage: req.query.error || '',
+        display: true,
+    });
+};
+
+export const filterTasksByCompletion = async (req, res) => {
+    
+    const completionStatus = parseInt(req.params.id) === 1;
+
+    console.log(completionStatus);
+    let tasks;
+    try {
+        tasks = await getTasksByCompletion(completionStatus);
+    
+    } catch (error) {
+        console.error("Error in filterTasksByCompletion:", error);
+        res.status(400).send("An error occurred while fetching tasks.");
+        return;
+    }
+
+    res.render("index", {
+        tasks: tasks,
+        postmessage: req.query.error || '',
+        display: true,
+    });
+};
+
+
+export const filterTasksByPriority = async (req, res) => {
+   
+    const priorityId = parseInt(req.params.id);
+
+    let tasks;
+    try {
+        tasks = await getTasksByPriority(priorityId);
+    } catch (error) {
+        res.status(400).send("An error occurred while fetching tasks.");
+        return;
+    }
+
+    res.render("index", {
+        tasks: tasks,
+        postmessage: req.query.error || '',
+        display: true,
+    });
+};

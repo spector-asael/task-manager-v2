@@ -1,13 +1,13 @@
-<div class="header">
-    <h1> Welcome to the Task Manager! </h1>
-    
-<div >
-    <div >
-        <% if (tasks.length > 0) { %>
-            <% tasks.forEach(task => { %>
-                <% if (task.complete != 1) { %> 
-                    <div    >
-                        <div >
+<div>
+    <div class="header">
+        <h1> Welcome to the Task Manager! </h1>
+    </div>
+    <div>
+        <div>
+            <% if (tasks.length > 0) { %>
+                <% tasks.forEach(task => { %>
+                    <div class="task-bar <%= task.completion_status ? 'complete-task' : 'incomplete-task' %>">
+                        <div>
                             <p>Task ID: <%= task.task_id %></p>
                             <p>Task name: <%= task.task_name %></p>
                             <p>Task description: 
@@ -23,20 +23,19 @@
                             </p>
                         </div>
                         <div class="task-button">
-                            <% if (!task.complete) { %>
+                            <% if (!task.completion_status) { %>
                                 <button class="complete" task-id="<%= task.task_id %>"> Complete Task </button>
                             <% } else { %>
                                 <button class="undo" task-id="<%= task.task_id %>"> Undo Completion </button>
                             <% } %>
-                                <button class="delete" task-id="<%= task.task_id %>"> Delete Task </button>
+                            <button class="delete" task-id="<%= task.task_id %>"> Delete Task </button>
                         </div>
                     </div>
-                <% } %>
-            <% }) %>
-        <% } else { %>
-            <p class="no">No tasks available</p>
-        <% } %>
+                <% }) %>
+            <% } else { %>
+                <p class="no">No tasks available</p>
+            <% } %>
+        </div>
     </div>
 </div>
-
-<script type="module" src="./script.js"></script>
+<script type="module" src="/script.js"></script>

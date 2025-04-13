@@ -1,3 +1,4 @@
+
 // filename: ./public/mainFunctions.js
 
 import {handleError} from './helperfunctions.js'
@@ -37,7 +38,6 @@ export function completeTask(){
 
 export function uncompleteTask(){
    
-    console.log("mainfunctions.js")
     const taskID = this.getAttribute('task-id');
 
     fetch(`/uncomplete-task/${taskID}`, {
@@ -58,10 +58,6 @@ export function addTask (event) {
 
     const formData = new FormData(event.target);  
     
-    for (let pair of formData.entries()) {
-        console.log(pair[0] + ": " + pair[1]);
-    }
-
     const urlEncodedData = new URLSearchParams();
     formData.forEach((value, key) => {
         urlEncodedData.append(key, value);

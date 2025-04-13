@@ -37,7 +37,7 @@ export function completeTask(){
 
 export function uncompleteTask(){
    
-    console.log("mainfunctions.js");
+    console.log("mainfunctions.js")
     const taskID = this.getAttribute('task-id');
 
     fetch(`/uncomplete-task/${taskID}`, {
@@ -91,3 +91,20 @@ export function addTask (event) {
         
     });
 };
+
+export function searchTasksByName(name) {
+    window.location.href = `/search?name=${encodeURIComponent(name)}`;
+}
+
+export function filterTasksByStatus(status) {
+    window.location.href = `/filter/status/${encodeURIComponent(status)}`;
+}
+
+export function filterTasksByPriority(priority) {
+    window.location.href = `/filter/priority/${encodeURIComponent(priority)}`;
+}
+
+export function resetFilters() {
+    window.location.href = `/`;
+}
+

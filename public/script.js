@@ -1,12 +1,22 @@
 // filename: ./public/script.js
 
-import { deleteTask, addTask, completeTask, uncompleteTask } from "./mainFunctions.js";
+import { deleteTask, addTask, completeTask, 
+    uncompleteTask, searchTasksByName, filterTasksByStatus,
+    filterTasksByPriority, resetFilters } from "./mainFunctions.js";
 
 const addingTask = document.getElementById("task-form");
 
 const deleteButtons = document.getElementsByClassName('delete');
 const completeButtons = document.getElementsByClassName('complete');
 const undoButtons = document.getElementsByClassName('undo');
+
+const searchBtn = document.getElementById("search-button");
+const searchInput = document.getElementById("search-bar");
+
+const statusButtons = document.querySelectorAll("[data-status]");
+const priorityButtons = document.querySelectorAll("[data-priority]");
+
+const resetFilterButton = document.getElementById("reset");
 
 addingTask.addEventListener("submit", addTask); 
 
@@ -42,10 +52,38 @@ const addTaskButton = document.getElementById("add-task");
             if (form.style.display == "flex") {
                 form.style.display = "none";
                 addTaskButton.innerText = "Add task";
-                console.log("Hi")
+              
             } else {
             form.style.display = "flex";
             addTaskButton.innerText = "Hide"
-            console.log("Hi2")
+           
         }
 });
+
+
+searchBtn.addEventListener("click", () => {
+    console.log("Search");
+    console.log(searchInput);
+        const name = searchInput.value.trim();
+    console.log(name);
+        if (name) {
+            searchTasksByName(name);
+        }
+});
+
+
+statusButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const status = button.getAttribute("data-status");
+        filterTasksByStatus(status);
+    });
+});
+
+priorityButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const priority = button.getAttribute("data-priority");
+        filterTasksByPriority(priority);
+    });
+});
+
+resetFilterButton.addEventListener("click", resetFilters);

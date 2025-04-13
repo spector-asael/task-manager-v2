@@ -5,7 +5,8 @@ export const getTasks = async (req, res) => {
     try {
         const result = await query(`
             SELECT * FROM tasks
-            INNER JOIN priority ON priority.priority_id = tasks.task_priority`);
+            INNER JOIN priority ON priority.priority_id = tasks.task_priority
+            ORDER BY tasks.task_id`);
         return result.rows;
     } catch ( error ) {
         console.error("Error fetching tasks:", error);
@@ -58,4 +59,52 @@ export const uncompleteTask = async (taskId) => {
         `, [taskId])
     
     return result.rows[0];
+};
+
+export const getTasksByName = async (searchTerm) => {
+    try {
+        const result = await query(`
+            SELECT * FROM tasks 
+            INNER JOIN priority ON priority.priority_id = tasks.task_priority
+            WHERE LOWER(task_name) LIKE LOWER($1)
+            ORDER BY tasks.task_id;
+        `, [`%${searchTerm}%`]);
+
+        return result.rows;
+    } catch (error) {
+        console.error("Error searching tasks by name:", error);
+        throw error;
+    }
+};
+
+export const getTasksByCompletion = async (isComplete) => {
+    try {
+        const result = await query(`
+            SELECT * FROM tasks
+            INNER JOIN priority ON priority.priority_id = tasks.task_priority
+            WHERE completion_status = $1
+            ORDER BY tasks.task_id;
+        `, [isComplete]);
+
+        return result.rows;
+    } catch (error) {
+        console.error("Error fetching tasks by completion status:", error);
+        throw error;
+    }
+};
+
+export const getTasksByPriority = async (priority) => {
+    try {
+        const result = await query(`
+            SELECT * FROM tasks
+            INNER JOIN priority ON priority.priority_id = tasks.task_priority
+            WHERE task_priority = $1
+            ORDER BY tasks.task_id;
+        `, [priority]);
+
+        return result.rows;
+    } catch (error) {
+        console.error("Error fetching tasks by priority:", error);
+        throw error;
+    }
 };

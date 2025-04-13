@@ -1,0 +1,39 @@
+<div class="addtask">
+    <button id="add-task"> Add-Task </button>
+
+    
+    <form id="task-form" method="post" action="/tasks"> 
+
+        <h2 id="general-error-message" class="error"> </h2>
+        <h2 id="success-message"> </h2>
+        
+        <label for="task-name"> Task Name:</label>
+        <input type="text" id="task_name" name="task-name">
+
+        <h2 id="error-message-task-name" class="error"> </h2>
+
+        <label for="description"> Description:</label>
+        <textarea id="task_description" name="description"></textarea>
+
+        <h2 id="error-message-task-description" class="error"> </h2>
+
+        <label for="priority"> Priority: </label> 
+        <div class="priority">
+            <label>
+            <input type="radio" name="task-priority" value="1" checked> Low
+            </label>
+            <label>
+            <input type="radio" name="task-priority" value="2"> Medium 
+            </label>
+            <label>
+                <input type="radio" name="task-priority" value="3"> High
+            </label>
+        </div>
+
+        <h2 id="error-message-task-priority" class="error"> </h2>
+
+        <input type="submit" value="Add New Task" id="submit">
+
+    </form>
+
+</div>

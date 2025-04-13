@@ -37,7 +37,6 @@ export function completeTask(){
 
 export function uncompleteTask(){
    
-    console.log("mainfunctions.js")
     const taskID = this.getAttribute('task-id');
 
     fetch(`/uncomplete-task/${taskID}`, {

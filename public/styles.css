@@ -244,6 +244,20 @@ textarea:focus {
   .task-button button:hover {
     filter: brightness(1.2);
   }
+
+  .no {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+    font-style: italic;
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 8px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
 /* ========== BUTTONS ========== */
 #add-task,
 #submit {

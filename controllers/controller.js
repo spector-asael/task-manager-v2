@@ -34,12 +34,13 @@ export const postAddTask = async (req, res) => {
         { code: '23503', field: 'task_priority', message: 'The specified priority does not exist.' },
         { code: '23502', field: 'task_name', message: 'Please provide a task name.' },
         { code: '23514', field: 'task_name', message: 'Task name must have at least 3 characters' },
-        { code: '22001', field: 'task_name', message: 'Task name cannot exceed 100 characters' },
-        { code: '22001', field: 'task_description', message: 'Description cannot exceed 500 characters' }
+        { code: '22001', field: 'value too long for type character varying(100)', message: 'Task name cannot exceed 100 characters' },
+        { code: '22001', field: 'value too long for type character varying(500)', message: 'Description cannot exceed 500 characters' }
     ];
 
     try {
         const newTask = await addTask(name, description, priority);
+        return res.status(201).json({ success: true, message: "Successfully added task!" });
     } catch (error) {
         console.log(error);
         for(let i = 0; i < errorMessages.length; i++){
@@ -48,7 +49,7 @@ export const postAddTask = async (req, res) => {
             }
         }
     }
-    res.status(201).json({ success: true, message: "Successfully added task!" });
+    return res.status(500).json({ success: false, message: "An unknown error occured." });
 }
 
 export const deleteTaskById = async (req, res) => {
@@ -103,7 +104,8 @@ export const uncompleteTaskById = async (req, res) => {
 };
 
 export const searchTasksByName = async (req, res) => {
-    const taskName = req.query.taskName || '';
+    
+    const taskName = req.query.name 
 
     let tasks;
     try {

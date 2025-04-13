@@ -62,13 +62,20 @@ const addTaskButton = document.getElementById("add-task");
 
 
 searchBtn.addEventListener("click", () => {
-    console.log("Search");
+   
     console.log(searchInput);
         const name = searchInput.value.trim();
     console.log(name);
         if (name) {
             searchTasksByName(name);
         }
+});
+
+searchInput.addEventListener("keypress", function (event) {
+   
+    if (event.key === "Enter") {
+      searchBtn.click();   
+    }
 });
 
 
@@ -87,3 +94,4 @@ priorityButtons.forEach(button => {
 });
 
 resetFilterButton.addEventListener("click", resetFilters);
+

@@ -1,5 +1,6 @@
+// filename: ./public/helperfunctions.js
 export function handleError(error){
-    if(error.field == "task_name"){
+    if(error.field == "task_name" || error.field == "value too long for type character varying(100)"){
 
         const errorMessage = document.getElementById("error-message-task-name");
         const taskNamefield = document.getElementById("task_name");
@@ -8,7 +9,7 @@ export function handleError(error){
         errorMessage.innerText = error.message;
         taskNamefield.classList.add("input-error");
 
-    } else if (error.field == "task_description"){
+    } else if (error.field == "task_description" || error.field == "value too long for type character varying(500)"){
 
         const errorMessage = document.getElementById("error-message-task-description");
         const taskDescriptionField = document.getElementById("task_description");

@@ -7,7 +7,7 @@ export const getTasks = async (req, res) => {
         const result = await query(`
             SELECT * FROM tasks
             INNER JOIN priority ON priority.priority_id = tasks.task_priority
-            ORDER BY tasks.task_id`);
+            ORDER BY tasks.task_id DESC`);
         return result.rows;
     } catch ( error ) {
         console.error("Error fetching tasks:", error);
@@ -84,7 +84,7 @@ export const getTasksByCompletion = async (isComplete) => {
             SELECT * FROM tasks
             INNER JOIN priority ON priority.priority_id = tasks.task_priority
             WHERE completion_status = $1
-            ORDER BY tasks.task_id;
+            ORDER BY tasks.task_id ;
         `, [isComplete]);
 
         return result.rows;
